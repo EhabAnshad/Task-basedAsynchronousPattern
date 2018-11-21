@@ -1,0 +1,86 @@
+﻿@model WebApp.Models.Order
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <meta http-equiv="refresh" content="2" />
+</head>
+<body>
+
+    <div>
+        <h3>Order</h3>
+        <hr/>
+        <dl class="dl-horizontal">
+            <dt> <p>Last update: @DateTime.Now </p></dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.OrderId) :
+                @Html.DisplayFor(model => model.OrderId)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BatchCount) :
+                @Html.DisplayFor(model => model.BatchCount)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.NumberPerBatch) :
+                @Html.DisplayFor(model => model.NumberPerBatch)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalOrdersCount) :
+                @Html.DisplayFor(model => model.TotalOrdersCount)
+            </dt>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CompletedOrdersCount) :
+                @Html.DisplayFor(model => model.CompletedOrdersCount)
+            </dt>
+            <dt>
+            </dt>
+            
+        </dl>
+        <div>
+            @if (Model.CompletedPerBatch == null)
+            {
+                <br /> <span>Batches processing will start shortly...</span><br /><br />
+            }
+            else
+            {
+                <table border="2">
+                    <tr>
+                        <th>Batch id</th>
+                        <th>Batch Value</th>
+                        <th>Is Completed</th>
+                    </tr>
+                    @foreach (var batch in Model.CompletedPerBatch)
+                    {
+                        <tr>
+                            <td align="center">@batch.Key</td>
+                            <td align="center">@batch.Value</td>
+                            <td align="center">@batch.IsCompleted</td>
+                        </tr>
+                    }
+                </table>
+
+                if (Model.CompletedPerBatch.Any(x => x.IsCompleted == false))
+                {
+                    <br /> <span> Batch is being processed </span><br />
+                }
+                else
+                {
+                    <br /> <h1>Batch processing completed successfully</h1><br />
+                }
+            }
+        </div>
+    </div>
+    <div>
+        <br /><br />
+        @Html.ActionLink("Refresh", "Refresh", new { id = Model.OrderId }) |
+        <a asp-action="Index">Back to Main</a>
+    </div>
+</body>
+</html>
