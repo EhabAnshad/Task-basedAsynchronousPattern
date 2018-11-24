@@ -34,7 +34,7 @@ namespace ExternalService.Controllers
             _logger.Log(LogLevel.Information, $"Multiplier service received a request. order id: '{model.OrderId}', Batch Id :'{model.BatchId}'.");
             try
             {
-                await _multiplierService.MultiplyAsync(_cancellationService.GetToken(), model.OrderId, model.Key, model.Value);
+                _multiplierService.MultiplyAsync(_cancellationService.GetToken(), model.OrderId, model.Key, model.Value);
             }
             catch (OperationCanceledException)
             {

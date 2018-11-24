@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Api",
+    "\\Api.Test",
+    "\\Common",
+    "\\MultiplyService",
+    "\\MultiplyService\\Controllers",
+    "\\MultiplyService\\Services"
+  ],
+  "PreviewInSolutionExplorer": false
+}

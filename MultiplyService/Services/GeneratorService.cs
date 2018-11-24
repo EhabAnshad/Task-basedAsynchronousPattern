@@ -31,20 +31,23 @@ namespace ExternalService.Services
         public async Task GenerateRandomNumber(CancellationToken token, Guid id, int numberOfBatches)
         {
             _logger.Log(LogLevel.Information,$"Started Generate Simulated work, number of batches:'{numberOfBatches}' the order id is: '{id}'");
-            for (var i = 1; i <= numberOfBatches; i++)
-            {
-                token.ThrowIfCancellationRequested();
-                var delay = GenerateRandomInt(5, 10);
-                var generatedNumber = GenerateRandomInt(1, 100);
 
-                Thread.Sleep(delay * 1000);
-                var batch = new BatchNumbersGenerated(id, i.ToString(), generatedNumber);
+            Parallel.For(0, numberOfBatches,
+                index =>
+                {
+                    token.ThrowIfCancellationRequested();
+                    var delay = GenerateRandomInt(5, 10);
+                    var generatedNumber = GenerateRandomInt(1, 100);
 
-                var path = _section["GeneratePath"];
-                _logger.Log(LogLevel.Information, $"Generate work completed for batch'{i.ToString()}', generated number is:{generatedNumber} the order id is: '{id}'");
-                await _serverClient.PostAsync(token, batch, path: path);
-                //TODO: Think if this is real service then we should log this to DB so my TODO to add to DB
-            }
+                    Thread.Sleep(delay * 1000);
+                    var batch = new BatchNumbersGenerated(id, index.ToString(), generatedNumber);
+
+                    var path = _section["GeneratePath"];
+                    _logger.Log(LogLevel.Information,
+                        $"Generate work completed for batch'{index.ToString()}', generated number is:{generatedNumber} the order id is: '{id}'");
+                    _serverClient.PostAsync(token, batch, path: path);
+                    //TODO: Think if this is real service then we should log this to DB so my TODO to add to DB
+                });
         }
     }
 }

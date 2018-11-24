@@ -41,7 +41,7 @@ namespace ExternalService.Services
             var path = _section["MultiplyPath"];
             _logger.Log(LogLevel.Information, $"Multiply work completed for batch Id '{batchId}', Multiplied number is:{multipliedNumber} the order id is: '{orderId}'");
 
-            await _serverClient.PostAsync(token, model, path);
+             _serverClient.PostAsync(token, model, path);
         }
     }
 }

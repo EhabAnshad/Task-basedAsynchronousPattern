@@ -8,3 +8,8 @@
 /Api.Test/obj
 /Common/obj
 /MultiplyService/obj
+/WebApp/bin/Debug/netcoreapp2.1
+/MultiplyService/bin/Debug/netcoreapp2.1
+/Common/bin/Debug/netcoreapp2.1
+/Api.Test/bin/Debug/netcoreapp2.1
+/Api/bin/Debug/netcoreapp2.1

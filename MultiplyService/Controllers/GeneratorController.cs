@@ -35,7 +35,7 @@ namespace ExternalService.Controllers
             _logger.Log(LogLevel.Information, $"Generator service received a request. order id: '{generateNumberModel.OrderId}', Batch count :'{generateNumberModel.BatchCount}'.");
             try
             {
-                await _generatorService.GenerateRandomNumber(_cancellationService.GetToken(), generateNumberModel.OrderId, generateNumberModel.BatchCount);
+                 _generatorService.GenerateRandomNumber(_cancellationService.GetToken(), generateNumberModel.OrderId, generateNumberModel.BatchCount);
 
             }
             catch (OperationCanceledException)
