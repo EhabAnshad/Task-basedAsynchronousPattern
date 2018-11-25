@@ -49,7 +49,7 @@ https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patter
 
 
 # TODO:
-1.  ~~Add project bussiness rules ~~
+1. ~~Add project bussiness rules~~
 2. Replace UI with correct FW
 3. Seprate DB models vs controllers models
 4. Replace commiunication channel with interfaces and ammend dev enviroment
